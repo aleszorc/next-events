@@ -5,7 +5,8 @@ import { Fragment } from 'react';
 import { useRouter } from 'next/router';
 
 const AllEventsPage = (props) => {
-  const events = props.events;
+  const router = useRouter();
+  const { events } = props;
 
   const findEventsHandler = (year, month) => {
     const fullPath = `/events/${year}/${month}`;
@@ -22,11 +23,12 @@ const AllEventsPage = (props) => {
 };
 
 export async function getStaticProps() {
-  const allEvents = await getAllEvents();
+  const events = await getAllEvents();
   return {
     props: {
-      events: allEvents,
+      events: events,
     },
+    revalidate: 60,
   };
 }
 
