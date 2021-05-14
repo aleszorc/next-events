@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import { getAllEvents } from '../../helpers/api-util';
 import EventList from '../../components/events/event-list';
 import EventsSearch from '../../components/events/events-search';
@@ -16,6 +17,13 @@ const AllEventsPage = (props) => {
 
   return (
     <Fragment>
+      <Head>
+        <title>All Events</title>
+        <meta
+          name="description"
+          content="Find great events that allow you to network and grow"
+        />
+      </Head>
       <EventsSearch onSearch={findEventsHandler} />
       <EventList items={events} />
     </Fragment>
