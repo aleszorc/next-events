@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import CommentList from './comment-list';
 import NewComment from './new-comment';
@@ -12,11 +12,11 @@ function Comments(props) {
 
   useEffect(() => {
     if (showComments) {
-      fetch('/api/comments/' + eventId).then((response) =>
-        response.json().then((data) => {
+      fetch('/api/comments/' + eventId)
+        .then((response) => response.json())
+        .then((data) => {
           setComments(data.comments);
-        })
-      );
+        });
     }
   }, [showComments]);
 
@@ -28,7 +28,7 @@ function Comments(props) {
     fetch('/api/comments/' + eventId, {
       method: 'POST',
       body: JSON.stringify(commentData),
-      header: {
+      headers: {
         'Content-Type': 'application/json',
       },
     })
